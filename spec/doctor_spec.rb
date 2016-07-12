@@ -33,6 +33,14 @@ describe(Doctor) do
     end
   end
 
+  describe('#==') do
+    it('is the same doctor if it has the same name') do
+      test_doctor1 = Doctor.new({:name => "Doctor Jones", :id => nil})
+      test_doctor2 = Doctor.new({:name => "Doctor Jones", :id => nil})
+      expect(test_doctor1).to(eq(test_doctor2))
+    end
+  end
+
   describe(".find") do
     it("returns a doctor by their ID") do
       test_doctor = Doctor.new({:name => "Doctor Jones", :id => nil})
