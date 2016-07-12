@@ -2,6 +2,7 @@ require('rspec')
 require('doctor')
 require('pg')
 require('spec_helper')
+require('pry')
 
 describe(Doctor) do
   describe('.all') do
@@ -48,6 +49,18 @@ describe(Doctor) do
       test_doctor2 = Doctor.new({:name => "Doctor Barnes", :id => nil})
       test_doctor2.save()
       expect(Doctor.find(test_doctor2.id())).to(eq(test_doctor2))
+    end
+  end
+
+  describe("#patients") do
+    it("returns an array of patients for that doctor") do
+      test_doctor = Doctor.new({:name => "Doctor Jones", :id => nil})
+      test_doctor.save()
+      test_patient1 = Patient.new({:name => "Gary Oldman", :birthday => '1990-12-20', :doctor_id => test_doctor.id(), :id => nil})
+      test_patient1.save()
+      test_patient2 = Patient.new({:name => "Frank Miller", :birthday => '1980-01-03', :doctor_id => test_doctor.id(), :id => nil})
+      test_patient2.save()
+      expect(test_doctor.patients()).to(eq([test_patient1, test_patient2]))
     end
   end
 
