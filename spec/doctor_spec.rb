@@ -3,7 +3,6 @@ require('doctor')
 require('pg')
 require('spec_helper')
 
-
 describe(Doctor) do
   describe('.all') do
     it('starts off with no lists') do
@@ -34,7 +33,15 @@ describe(Doctor) do
     end
   end
 
-
+  describe(".find") do
+    it("returns a doctor by their ID") do
+      test_doctor = Doctor.new({:name => "Doctor Jones", :id => nil})
+      test_doctor.save()
+      test_doctor2 = Doctor.new({:name => "Doctor Barnes", :id => nil})
+      test_doctor2.save()
+      expect(Doctor.find(test_doctor2.id())).to(eq(test_doctor2))
+    end
+  end
 
   #
   # describe(".find") do
