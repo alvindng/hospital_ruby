@@ -14,4 +14,12 @@ describe('adding a new doctor', {:type => :feature}) do
   end
 end
 
-describe('')
+describe('viewing all doctors', {:type => :feature}) do
+  it('allows the user to see all doctors') do
+    doctor = Doctor.new({:name => 'Doctor Jones', :specialty => 'Dentist', :id => nil})
+    doctor.save()
+    visit('/')
+    click_link('View All Doctors')
+    expect(page).to have_content(doctor.name())
+  end
+end
