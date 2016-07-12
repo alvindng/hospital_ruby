@@ -13,14 +13,21 @@ describe(Doctor) do
 
   describe("#name") do
       it("tells you doctor name") do
-        test_doctor = Doctor.new({:name => "Doctor Holiday", :id => nil})
+        test_doctor = Doctor.new({:name => "Doctor Holiday", :specialty => "Dentist", :id => nil})
         expect(test_doctor.name()).to(eq("Doctor Holiday"))
+      end
+    end
+
+  describe("#specialty") do
+      it("tells you doctor specialty") do
+        test_doctor = Doctor.new({:name => "Doctor Holiday", :specialty => "Dentist", :id => nil})
+        expect(test_doctor.specialty()).to(eq("Dentist"))
       end
     end
 
   describe("#save") do
     it("lets you save doctors to the database") do
-      test_doctor = Doctor.new({:name => "Doctor Holiday", :id => nil})
+      test_doctor = Doctor.new({:name => "Doctor Holiday", :specialty => "Dentist", :id => nil})
       test_doctor.save()
       expect(Doctor.all()).to(eq([test_doctor]))
     end
@@ -28,7 +35,7 @@ describe(Doctor) do
 
   describe("#id") do
     it("sets its ID when you save it") do
-      test_doctor = Doctor.new({:name => "Doctor Holiday", :id => nil})
+      test_doctor = Doctor.new({:name => "Doctor Holiday", :specialty => "Dentist", :id => nil})
       test_doctor.save()
       expect(test_doctor.id()).to(be_an_instance_of(Fixnum))
     end
@@ -36,17 +43,17 @@ describe(Doctor) do
 
   describe('#==') do
     it('is the same doctor if it has the same name') do
-      test_doctor1 = Doctor.new({:name => "Doctor Jones", :id => nil})
-      test_doctor2 = Doctor.new({:name => "Doctor Jones", :id => nil})
+      test_doctor1 = Doctor.new({:name => "Doctor Jones", :specialty => "Dentist", :id => nil})
+      test_doctor2 = Doctor.new({:name => "Doctor Jones", :specialty => "Dentist", :id => nil})
       expect(test_doctor1).to(eq(test_doctor2))
     end
   end
 
   describe(".find") do
     it("returns a doctor by their ID") do
-      test_doctor = Doctor.new({:name => "Doctor Jones", :id => nil})
+      test_doctor = Doctor.new({:name => "Doctor Jones", :specialty => "Dentist", :id => nil})
       test_doctor.save()
-      test_doctor2 = Doctor.new({:name => "Doctor Barnes", :id => nil})
+      test_doctor2 = Doctor.new({:name => "Doctor Barnes", :specialty => "Dentist", :id => nil})
       test_doctor2.save()
       expect(Doctor.find(test_doctor2.id())).to(eq(test_doctor2))
     end
@@ -54,7 +61,7 @@ describe(Doctor) do
 
   describe("#patients") do
     it("returns an array of patients for that doctor") do
-      test_doctor = Doctor.new({:name => "Doctor Jones", :id => nil})
+      test_doctor = Doctor.new({:name => "Doctor Jones", :specialty => "Dentist", :id => nil})
       test_doctor.save()
       test_patient1 = Patient.new({:name => "Gary Oldman", :birthday => '1990-12-20', :doctor_id => test_doctor.id(), :id => nil})
       test_patient1.save()
