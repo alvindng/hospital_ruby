@@ -17,4 +17,13 @@ class Doctor
     doctors
   end
 
+  define_method(:save) do
+    result = DB.exec("INSERT INTO doctors (name) VALUES ('#{@name}') RETURNING id;")
+    @id = result.first().fetch("id").to_i()
+  end
+
+  define_method(:==) do |another_doctor|
+    self.name().==(another_doctor.name()).&(self.id().==(another_doctor.id()))
+  end
+
 end
