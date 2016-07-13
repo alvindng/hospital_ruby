@@ -1,0 +1,22 @@
+<h3>Add a Patient</h3>
+
+<form action="/doctor" method="post">
+  <input id="doctor_id" type="hidden" name="doctor_id" value="<%= @doctor_id %>">
+
+  <label for="patient_name">Name of Patient:</label>
+  <input id="patient_name" name="patient_name" type="text">
+
+  <label for="birthday">Birthday:</label>
+  <input id="birthday" name="birthday" type="text">
+
+  <button type="submit">Add Patient</button>
+</form>
+
+<hr>
+
+<div class="container">
+  <a href="/"><button class="btn">Home</a>
+  <a href="/doctors"><button class="btn">View All Doctors</a>
+  <a href="/doctors/new"><button class="btn">Add New Doctor</a>
+  <a href="/patient/new"><button class="btn">Add New Patient</a>
+</div>
